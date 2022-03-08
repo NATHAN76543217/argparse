@@ -26,7 +26,10 @@ DYLIBSUFFIX=dylib
 DYLIB_MAKE_CMD=$(CROSS_COMPILE)gcc -shared -o $(DYLIBNAME) $(ALL_LDFLAGS)
 endif
 
-all: $(DYLIBNAME) $(STLIBNAME)
+all: static
+
+static: $(STLIBNAME)
+dynamic: $(DYLIBNAME)
 
 OBJS += argparse.o
 
@@ -47,3 +50,5 @@ clean:
 	rm -rf *.so
 	rm -rf *.dylib
 	make -C tests/ clean
+
+fclean: clean
